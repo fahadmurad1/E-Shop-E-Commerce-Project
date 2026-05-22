@@ -75,6 +75,11 @@ app.get('/api/config/razorpay', (req, res) =>
 // Make uploads folder static
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
+// Root health-check route
+app.get('/', (req, res) => {
+  res.json({ message: 'E-Shop API is running ✅', status: 'OK' });
+});
+
 // Error Handling Middleware
 app.use(notFound);
 app.use(errorHandler);
