@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #f43f5e;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
