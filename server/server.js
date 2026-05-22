@@ -50,11 +50,25 @@ connectDB().then(async () => {
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://e-shop-e-commerce-project.vercel.app',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    process.env.FRONTEND_URL,
-  ].filter(Boolean),
+  origin: (origin, callback) => {
+    // Allow requests with no origin (Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes(origin) ||
+      /\.vercel\.app$/.test(origin)
+    ) {
+      return callback(null, true);
+    }
+    callback(new Error(`CORS blocked: ${origin}`));
+  },
   credentials: true,
 }));
 app.use(express.json());
